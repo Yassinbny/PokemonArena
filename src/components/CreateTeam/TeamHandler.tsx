@@ -48,12 +48,17 @@ const TeamHandler = () => {
   return (
     <div>
       <div className="flex flex-row justify-center">
-        <Button
-          className="mr-auto"
-          onClick={() => addTeam({ pokemons: [], isDraft: true })}
-        >
-          Add New Team
-        </Button>
+        <div className="flex gap-2 mr-auto">
+          {" "}
+          <Button
+            className=" cursor-pointer"
+            onClick={() => addTeam({ pokemons: [], isDraft: true })}
+          >
+            Add new team
+          </Button>
+          <Button className="cursor-pointer">Save team</Button>
+        </div>
+
         <h1 className="text-3xl mr-auto font-bold">
           Team {team ? team.id : "None"}
         </h1>

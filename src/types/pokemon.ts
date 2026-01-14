@@ -9,17 +9,19 @@ export interface PokemonListResponse {
   results: ResultPayload[];
 }
 
+export type StatsType = {
+  attack: number;
+  defense: number;
+  speed: number;
+  hp: number;
+};
+
 export interface Pokemon {
   id: number;
   name: string;
   image: string;
   types: string[];
-  stats: {
-    attack: number;
-    defense: number;
-    speed: number;
-    hp: number;
-  };
+  stats: StatsType;
 }
 
 export interface PokemonDetailResponse {

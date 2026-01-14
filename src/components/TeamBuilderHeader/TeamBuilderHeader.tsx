@@ -1,5 +1,3 @@
-import { fetchPokemonTypes } from "@/api/pokemon";
-import { useQuery } from "@tanstack/react-query";
 import { Input } from "../ui/input";
 import {
   SelectItem,
@@ -9,26 +7,16 @@ import {
   SelectContent,
   SelectGroup,
 } from "../ui/select";
-import { useSearchStore } from "@/store/SearchStore";
+import { useTeamBuilderHeader } from "./useTeamBuilderHeader";
 
 const TeamBuilderHeader = () => {
-  const typeToFind = useSearchStore((state) => state.typeToFind);
-  const setTypeToFind = useSearchStore((state) => state.setTypeToFind);
-  const queryText = useSearchStore((state) => state.queryText);
-  const setQueryText = useSearchStore((state) => state.setQueryText);
-  const { data: types } = useQuery<string[]>({
-    queryKey: ["pokemon-types"],
-    queryFn: () => fetchPokemonTypes(),
-    staleTime: 1000 * 60 * 60,
-  });
-  const handleSetTypeToFind = (type: string) => {
-    setTypeToFind(type);
-    setQueryText("");
-  };
-  const handleSetQueryText = (text: string) => {
-    setQueryText(text);
-    setTypeToFind("");
-  };
+  const {
+    types,
+    typeToFind,
+    queryText,
+    handleSetTypeToFind,
+    handleSetQueryText,
+  } = useTeamBuilderHeader();
   return (
     <div className="flex flex-row gap-3 mb-5">
       {" "}

@@ -13,7 +13,10 @@ const PokemonCard = ({ name }: { name: string }) => {
   );
   if (isLoading) {
     return (
-      <div className="bg-white rounded-lg shadow-lg py-4 px-2 w-full mx-auto flex flex-row gap-2 animate-pulse">
+      <div
+        data-testid="loading-container"
+        className="bg-white rounded-lg shadow-lg py-4 px-2 w-full mx-auto flex flex-row gap-2 animate-pulse"
+      >
         <div className="flex flex-col items-center">
           <div className="w-12 h-12 bg-gray-300 rounded-full border-2 border-gray-200 mb-1"></div>
           <div className="h-3 bg-gray-300 rounded w-12"></div>
@@ -51,11 +54,12 @@ const PokemonCard = ({ name }: { name: string }) => {
     <div
       className={`${
         isOnCurrentTeam && "border-2 border-green-500"
-      } bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 py-4 px-2 w-full mx-auto`}
+      }  rounded-lg backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 py-4 px-2 w-full mx-auto`}
     >
       <div className="flex flex-row justify-between items-center">
         {" "}
         <img
+          data-testid="pokemon-image"
           src={data.image}
           alt={data.name}
           className="size-20  border-gray-200"

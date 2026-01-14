@@ -14,6 +14,7 @@ interface TeamStore {
   addTeam: (team: Omit<TeamState, "id">) => void;
   saveTeam: (id: number) => void;
   addToTeam: (id: number, pokemon: Pokemon, isDraft: boolean) => void;
+  removeTeam: (id: number) => void;
   setCurrentTeamId: (id: number) => void;
   removeFromTeam: (teamId: number, pokemonId: number) => void;
   reorderTeamPokemons: (teamId: number, newPokemons: Pokemon[]) => void;
@@ -60,6 +61,10 @@ export const useTeamStore = create<TeamStore>()(
             ),
           };
         }),
+      removeTeam: (id) =>
+        set((state) => ({
+          teams: state.teams.filter((team) => team.id !== id),
+        })),
       setCurrentTeamId: (id) => set(() => ({ currentTeamId: id })),
       removeFromTeam: (teamId, pokemonId) => {
         set((state) => {

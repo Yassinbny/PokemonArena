@@ -3,7 +3,7 @@ import PokemonCard from "@/components/PokemonCard/PokemonCard";
 import TeamBuilderHeader from "@/components/TeamBuilderHeader/TeamBuilderHeader";
 import { Button } from "@/components/ui/button";
 
-import { useTeamBuilder } from "@/hooks/useTeamBuilder";
+import { useTeamBuilder } from "@/pages/TeamBuilder/useTeamBuilder";
 import { useCurrentTeam } from "@/store/teamStore";
 
 const TeamBuilder = () => {

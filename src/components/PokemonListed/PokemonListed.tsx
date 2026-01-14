@@ -3,7 +3,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Button } from "../ui/button";
 import { X, GripVertical } from "lucide-react";
-
 interface PokemonListedProps {
   pokemon: Pokemon;
   onRemove: () => void;
@@ -54,7 +53,7 @@ export const PokemonListed = ({
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="flex flex-row items-center gap-5 p-5 border rounded-lg bg-white shadow-sm"
+      className="flex flex-row items-center gap-5 w-full p-5 border rounded-lg bg-white shadow-sm"
     >
       <div
         {...listeners}

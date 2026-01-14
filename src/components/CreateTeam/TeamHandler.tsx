@@ -1,49 +1,33 @@
+import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  type DragEndEvent,
-} from "@dnd-kit/core";
-import {
-  arrayMove,
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useCurrentTeam, useTeamStore } from "@/store/teamStore";
 import { Button } from "../ui/button";
 import { PokemonListed } from "../PokemonListed/PokemonListed";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+
+import { Shuffle } from "lucide-react";
+import { useTeamHandler } from "./UseTeamHandler";
 
 const TeamHandler = () => {
-  const currentTeamId = useTeamStore((state) => state.currentTeamId);
-  const team = useCurrentTeam();
-  const addTeam = useTeamStore((state) => state.addTeam);
-  const reorderTeamPokemons = useTeamStore(
-    (state) => state.reorderTeamPokemons
-  );
-  const removeFromTeam = useTeamStore((state) => state.removeFromTeam);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-
-    if (over && active.id !== over.id && team) {
-      const oldIndex = team.pokemons.findIndex((p) => p.id === active.id);
-      const newIndex = team.pokemons.findIndex((p) => p.id === over.id);
-
-      const newPokemons = arrayMove(team.pokemons, oldIndex, newIndex);
-      reorderTeamPokemons(team.id, newPokemons);
-    }
-  }
+  const {
+    currentTeamId,
+    team,
+    addTeam,
+    handleDragEnd,
+    handleSaveTeam,
+    removeFromTeam,
+    sensors,
+    handlerOrder,
+  } = useTeamHandler();
 
   return (
     <div>
@@ -56,11 +40,40 @@ const TeamHandler = () => {
           >
             Add new team
           </Button>
-          <Button className="cursor-pointer">Save team</Button>
+          <Button
+            disabled={!currentTeamId}
+            onClick={handleSaveTeam}
+            className="cursor-pointer"
+          >
+            Save team
+          </Button>
+          <Select
+            disabled={!currentTeamId}
+            onValueChange={(value) => handlerOrder(value)}
+          >
+            <SelectTrigger className="w-45 bg-gray-100 border-gray-300 text-gray-700 hover:bg-gray-200">
+              <SelectValue placeholder="Select a type" />
+            </SelectTrigger>{" "}
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="null">Order by</SelectItem>
+                <SelectItem value="attack">Attack</SelectItem>
+                <SelectItem value="speed">Speed</SelectItem>
+                <SelectItem value="defense">Defense</SelectItem>
+                <SelectItem value="hp">HP</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Button
+            className="cursor-pointer"
+            onClick={() => handlerOrder("random")}
+          >
+            <Shuffle size={16} />
+          </Button>
         </div>
 
         <h1 className="text-3xl mr-auto font-bold">
-          Team {team ? team.id : "None"}
+          {team && `Team ${team.id}`}
         </h1>
       </div>
       <DndContext
@@ -72,7 +85,7 @@ const TeamHandler = () => {
           items={team?.pokemons.map((p) => p.id) || []}
           strategy={verticalListSortingStrategy}
         >
-          <div className="flex flex-col gap-5 mt-4">
+          <div className="flex flex-col  items-center gap-5 mt-4">
             {team ? (
               team.pokemons.map((pokemon) => (
                 <PokemonListed
@@ -88,7 +101,9 @@ const TeamHandler = () => {
                 />
               ))
             ) : (
-              <div>No team selected</div>
+              <div className="flex rounded-md p-4 bg-white font-bold w-fit border-2 justify-center items-center">
+                No team selected{" "}
+              </div>
             )}
           </div>
         </SortableContext>

@@ -6,17 +6,17 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen bg-gray-100">
+    <div className="h-screen bg-blue-300">
       <div className="h-full flex flex-col">
-        <nav className="p-2 border-b-2 border-gray-200 bg-white/80 backdrop-blur-sm shadow-lg">
+        <nav className="p-2 bg-black backdrop-blur-sm shadow-lg">
           <div className="max-w-7xl mx-auto flex items-center ">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">P</span>
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
-                Pokémon Arena
-              </h1>
+              <img
+                src="public\images\pokeball.svg"
+                alt="Pokemon Ball"
+                className="w-6 h-6"
+              />
+              <h1 className="text-2xl font-bold text-white ">Pokémon Arena</h1>
             </div>
 
             <div className="flex gap-6 ml-auto">
@@ -26,7 +26,7 @@ export default function MainLayout({
                   `px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
                     isActive
                       ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
-                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      : "text-white hover:text-blue-600 hover:bg-blue-50"
                   }`
                 }
               >
@@ -38,7 +38,19 @@ export default function MainLayout({
                   `px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
                     isActive
                       ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg"
-                      : "text-gray-700 hover:text-red-600 hover:bg-red-50"
+                      : "text-white hover:text-red-600 hover:bg-red-50"
+                  }`
+                }
+              >
+                Team Builder
+              </NavLink>
+              <NavLink
+                to="/teams"
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
+                    isActive
+                      ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg"
+                      : "text-white hover:text-yellow-600 hover:bg-yellow-50"
                   }`
                 }
               >
@@ -50,7 +62,7 @@ export default function MainLayout({
                   `px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
                     isActive
                       ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg"
-                      : "text-gray-700 hover:text-green-600 hover:bg-green-50"
+                      : "text-white hover:text-green-600 hover:bg-green-50"
                   }`
                 }
               >
@@ -61,7 +73,7 @@ export default function MainLayout({
         </nav>
 
         <main className="flex-1 p-2 w-full">
-          <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-2 max-w-7xl mx-auto h-full">
+          <div className="bg-zinc-300/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-2 w-full mx-auto h-full">
             {children}
           </div>
         </main>

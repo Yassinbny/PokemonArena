@@ -12,7 +12,7 @@ export default function MainLayout({
           <div className="max-w-7xl mx-auto flex items-center ">
             <div className="flex items-center gap-2">
               <img
-                src="public\images\pokeball.svg"
+                src="images/pokeball.svg"
                 alt="Pokemon Ball"
                 className="w-6 h-6"
               />

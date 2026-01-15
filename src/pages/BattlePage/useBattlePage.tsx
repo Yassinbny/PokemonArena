@@ -14,7 +14,6 @@ export const useBattlePage = () => {
   const [teamA, setTeamA] = useState<number | null>(null);
   const [teamB, setTeamB] = useState<number | null>(null);
   const [battleStarted, setBattleStarted] = useState(false);
-  const [message, setMessage] = useState("SELECT YOUR TEAMS!");
   const [winner, setWinner] = useState<string | null>(null);
   const [remainingPokemonsA, setremainingPokemonsA] =
     useState<TeamState | null>(null);
@@ -35,7 +34,6 @@ export const useBattlePage = () => {
 
   const fightUtil = ({ teamA, teamB }: FightUtilParams) => {
     if (teamA.pokemons.length === 0 || teamB.pokemons.length === 0) {
-      setMessage("BOTH TEAMS MUST HAVE POKEMONS!");
       return;
     }
 
@@ -138,7 +136,6 @@ export const useBattlePage = () => {
     teamA,
     teamB,
     battleStarted,
-    message,
     winner,
     remainingPokemonsA,
     remainingPokemonsB,

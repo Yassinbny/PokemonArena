@@ -1,18 +1,10 @@
-export interface ApiOptions extends RequestInit {
-  params?: Record<string, string | number | boolean>;
-}
-
 export async function callApi<T>(
   url: string,
-  options: ApiOptions = {}
+  options: RequestInit = {}
 ): Promise<T> {
-  const { params, headers, ...rest } = options;
+  const { headers, ...rest } = options;
 
-  const query = params
-    ? "?" + new URLSearchParams(params as Record<string, string>).toString()
-    : "";
-
-  const response = await fetch(url + query, {
+  const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
       ...headers,

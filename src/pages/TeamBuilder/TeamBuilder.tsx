@@ -49,7 +49,11 @@ const TeamBuilder = () => {
           {renderContent()}
         </div>
         <div className="flex justify-between mt-5 gap-2">
-          <Button disabled={!canLoadPrevious} onClick={loadPrevious}>
+          <Button
+            className="cursor-pointer"
+            disabled={!canLoadPrevious}
+            onClick={loadPrevious}
+          >
             load Previous
           </Button>
           {isFullTeam && (
@@ -57,7 +61,11 @@ const TeamBuilder = () => {
               Team is already full (6 Pokemons)
             </div>
           )}
-          <Button disabled={!canLoadMore} onClick={loadMore}>
+          <Button
+            className="cursor-pointer"
+            disabled={!canLoadMore}
+            onClick={loadMore}
+          >
             Load More
           </Button>
         </div>
